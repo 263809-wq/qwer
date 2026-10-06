@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>달빛 점집</title>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+:root{color-scheme:dark;--bg:#05030c;--ink:#f6f1ff;--sub:#d2c9ee;--line:#3a2d63;--gold:#f0cf78;--pink:#ff8fb3;--teal:#7fe3da;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font:17px/1.75 "Gowun Batang",serif;display:flex;justify-content:center;
+background:radial-gradient(ellipse at 50% -5%,#2a1560 0,transparent 55%),radial-gradient(ellipse at 100% 100%,#4a0f3d 0,transparent 50%),radial-gradient(ellipse at 0 80%,#0c2a4a 0,transparent 50%),var(--bg);background-attachment:fixed}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0}
+.st{position:absolute;border-radius:50%;background:#fff;animation:tw 3s ease-in-out infinite}
+@keyframes tw{50%{opacity:.15}}
+main{position:relative;z-index:1;width:100%;max-width:540px;padding:36px 18px 60px}
+h1{font-size:2.3rem;margin:0 0 4px;text-align:center;background:linear-gradient(90deg,#f0cf78,#ff9ad0,#a58bff,#7fe3da,#f0cf78);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 6s linear infinite;filter:drop-shadow(0 0 14px #a58bff66)}
+@keyframes sh{to{background-position:250% 0}}
+.sub{text-align:center;color:var(--sub);margin:0 0 20px}
+label{display:block;margin:16px 0 6px;color:var(--gold);font-weight:700}
+input,select{width:100%;font:inherit;color:var(--ink);background:#120b22;border:1.5px solid var(--line);border-radius:12px;padding:11px 12px}
+.g3{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px}
+input:focus,select:focus,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;color:var(--ink);background:#120b22;border:1.5px solid var(--line);border-radius:999px;padding:7px 16px;cursor:pointer}
+.chip.on{border-color:var(--gold);background:#2a1d4d;box-shadow:0 0 14px #f0cf7855;color:#fff;font-weight:700}
+.err{color:#ff9a9a;min-height:1.7em;margin:10px 0 0}
+.btns{display:flex;gap:10px;margin-top:14px}
+.btn{flex:1;font:inherit;color:var(--ink);background:#120b22;border:1.5px solid var(--line);border-radius:999px;padding:13px 8px;cursor:pointer}
+.btn:hover{border-color:var(--gold)}
+.main{background:linear-gradient(90deg,#7b4dff,#e0559a);border:none;font-weight:700;color:#fff;box-shadow:0 0 22px #a58bff66;flex:2}
+.rune{width:110px;height:110px;margin:90px auto 24px;border-radius:50%;border:2px solid var(--pink);display:grid;place-items:center;font-size:3rem;color:var(--pink);box-shadow:0 0 36px #ff8fb388,inset 0 0 26px #ff8fb333;animation:beat 1s ease-in-out infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+.wait{text-align:center;color:var(--sub);font-size:1.15rem}
+.card{border:2px solid transparent;border-radius:22px;padding:26px 20px;background:linear-gradient(#0b0716,#0b0716) padding-box,conic-gradient(from var(--a),#f0cf78,#ff8fb3,#8a6bff,#7fe3da,#f0cf78) border-box;animation:in .6s both,rot 6s linear infinite;box-shadow:0 0 40px #6a3cff33}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+@keyframes rot{to{--a:360deg}}
+.who{color:var(--sub);margin:0 0 14px;font-size:.95rem;line-height:1.6}
+.top{display:flex;justify-content:space-between;align-items:center}
+.kind{margin:0;font-size:1.2rem;font-weight:700}
+.stars{color:var(--gold);font-size:1.3rem;letter-spacing:.1em}
+.love-c{color:var(--pink)}.study-c{color:var(--teal)}
+.head{font-size:1.4rem;font-weight:700;line-height:1.5;margin:8px 0 16px}
+.gauge{height:9px;border-radius:99px;background:#241a40;overflow:hidden}
+.gauge i{display:block;height:100%;border-radius:99px;background:currentColor;box-shadow:0 0 12px currentColor}
+.pct{color:var(--sub);margin:4px 0 14px;font-size:.95rem}
+.row{padding:11px 0;border-top:1px solid var(--line)}
+.row b{display:block;color:var(--gold);font-size:.95rem}
+.row p{margin:0}
+.mate{margin-top:14px;padding:6px 16px 4px;border-radius:16px;background:#150c28;border:1px solid #5a2b63}
+.mate .kind{padding:8px 0}
+.lucky{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin-top:14px;padding:14px 16px;border-radius:18px;background:#120b22;border:1px solid var(--line)}
+.heart{width:96px;filter:drop-shadow(0 0 14px #ff8fb3aa)}
+.heart text{fill:#fff;font:700 30px "Gowun Batang",serif}
+.lucky p{margin:0}
+.dot{display:inline-block;width:.8em;height:.8em;border-radius:50%;margin-right:5px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="sky" aria-hidden="true"></div>
+<main id="app"></main>
+<script>
+const P={
+"연애운":{cls:"love-c",
+sum:[["오늘은 마음이 엇갈리기 쉬운 날이에요, {n}","서두르면 오해가 생겨요. 오늘은 한 걸음 물러나요","연락 타이밍이 자꾸 어긋나는 밤이에요"],
+["큰 변화는 없지만 마음은 편안한 하루예요","{n}의 마음이 조용히 정리되는 날이에요","작은 대화 하나가 분위기를 좌우해요"],
+["{n} 곁에 묘한 인연의 기운이 맴돌아요","달빛 아래 뜻밖의 연락이 도착할지도 몰라요","누군가 {n}의 눈빛에 오래 머물러요"]],
+s1:["마음의 온도",[["감정이 예민해요. 사소한 말에도 서운할 수 있어요.","마음이 식은 듯 느껴져도 피곤해서일 가능성이 커요.","기대가 커서 실망도 커지기 쉬워요."],
+["감정이 잔잔해요. 무리하지 않으면 무난해요.","겉은 담담해도 속은 조금 흔들려요.","특별할 것 없지만 마음이 안정된 상태예요."],
+["따뜻함이 차오르는 중이에요. 표현하면 배로 돌아와요.","설레는 감정이 자연스럽게 커져요.","솔직해질수록 마음이 가벼워져요."]]],
+s2:["인연의 방향",[["오늘은 새 인연보다 기존 관계를 살피는 게 좋아요.","연락이 늦어도 사정이 있을 거예요. 단정은 금물이에요.","혼자 보내는 시간이 오히려 이득이에요."],
+["일상 속에서 자연스럽게 마주칠 수 있어요.","친구를 통해 소식이 전해질 수 있어요.","눈에 띄는 인연은 없지만 대화는 이어져요."],
+["새로운 모임이나 우연한 자리에서 인연이 스쳐요.","이미 곁에 있던 사람을 다시 보게 돼요.","먼저 건넨 인사 한마디가 인연이 돼요."]]],
+adv:["답장을 너무 오래 미루지 마세요.","한 박자 천천히 말하면 마음이 더 잘 전해져요.","웃으며 눈 마주치는 게 오늘의 열쇠예요.","비교와 질투는 접어두고 내 마음을 먼저 보세요.","밤늦은 고백보다 낮의 안부 한마디가 좋아요.","연락은 짧고 가볍게, 대신 진심을 담아요."]},
+"공부운":{cls:"study-c",
+sum:[["오늘은 집중이 잘 안 될 수 있어요, {n}. 욕심을 줄여요","머릿속이 흐린 날이에요. 쉬운 것부터 시작해요","계획대로 안 풀려도 자책은 금물이에요"],
+["평소만큼의 흐름이에요. 꾸준함이 답이에요","{n}의 실력이 조용히 쌓이는 하루예요","특별하진 않지만 복습하면 확실히 남아요"],
+["{n}의 집중력에 은은한 불이 켜졌어요","막혔던 개념이 갑자기 풀리는 날이에요","어제의 노력이 오늘 조용히 답을 내밀어요"]],
+s1:["집중력",[["산만해지기 쉬워요. 책상 위부터 비워 보세요.","졸음이 몰려와요. 짧은 산책이 도움이 돼요.","한 과목만 붙잡기보다 30분씩 바꿔 보세요."],
+["오후에 집중이 깊어져요. 알림을 꺼두면 더 좋아요.","25분 집중, 5분 휴식 리듬이 잘 맞아요.","초반은 느려도 뒤로 갈수록 붙어요."],
+["초반 30분이 골든타임이에요. 어려운 과목부터 하세요.","한 번 앉으면 시간이 순삭돼요.","밤에 몰입이 잘 돼요. 자정은 넘기지 마세요."]]],
+s2:["성적 흐름",[["실수가 잦을 수 있어요. 검토 시간을 꼭 남겨두세요.","암기가 잘 안 붙어요. 오늘은 이해 위주로 해요.","점수보다 오답 정리에 집중하면 나중에 이득이에요."],
+["정체기 같지만 사실은 도약 직전이에요.","꾸준히 하면 서서히 오르는 곡선이에요.","풀이 과정을 쓰는 습관이 점수를 지켜줘요."],
+["꾸준히 오르는 상승 곡선이에요.","암기 과목에서 좋은 결과가 기대돼요.","막힌 문제가 뜻밖에 풀려요."]]],
+adv:["자기 전 10분 암기가 오래 남아요.","친구에게 설명해 보면 이해가 두 배가 돼요.","틀린 문제 노트를 한 번 다시 열어 보세요.","물 한 잔과 스트레칭이 머리를 깨워줘요.","계획은 욕심내지 말고 70%만 잡으세요.","스마트폰은 다른 방에 두고 시작하세요."]}};
+const ST={"연애운":["솔로","썸 타는 중","연애 중","이별 직후"],"공부운":["열심히 하는 중","슬럼프","시작 전","시험 임박"]};
+const STT={"솔로":"솔로라면 취미 모임이나 지인 소개에서 기회가 와요.","썸 타는 중":"썸이라면 가벼운 만남 제안이 좋아요.","연애 중":"연애 중이라면 작은 안부나 선물이 효과적이에요.","이별 직후":"이별 직후라면 오늘은 나를 챙기는 날이에요.",
+"열심히 하는 중":"지금 페이스를 유지하고 휴식도 계획에 넣으세요.","슬럼프":"슬럼프라면 목표를 반으로 줄여 다시 시작해요.","시작 전":"시작이 반이에요. 10분만 앉아 보세요.","시험 임박":"시험이 코앞이면 새 내용보다 기출 복습이 좋아요."};
+const PT=[["나이·분위기",["동갑이거나 비슷한 또래","1~3살 연상 느낌","1~3살 연하 느낌","나이보다 차분한 사람"]],
+["첫인상",["말수가 적고 조용한 인상","눈웃음이 잘 어울리는 밝은 인상","깔끔하고 단정한 인상","처음엔 무뚝뚝하지만 웃으면 달라지는 인상"]],
+["성격",["약속을 잘 지키고 연락이 꾸준한 사람","말을 예쁘게 하고 잘 들어주는 사람","감정 표현이 솔직한 사람","생활 습관이 비슷해 대화가 편한 사람"]],
+["만나게 될 곳",["학교·직장 같은 일상 공간","친구 모임이나 소개","취미 활동이나 동호회","자주 가던 카페·운동 공간 근처"]]];
+const BL={A:"A형 특유의 꼼꼼함이 도움이 돼요.",B:"B형 특유의 자유로움이 매력이에요.",O:"O형 특유의 추진력이 빛나요.",AB:"AB형 특유의 독특한 감각이 통해요."};
+const MT={"좋음":"좋은 기분을 오늘의 연료로 쓰세요.","보통":"평온한 상태가 오늘은 강점이에요.","지침":"지친 날엔 일찍 쉬는 게 운을 지켜줘요.","설렘":"설렘은 좋지만 들뜬 결정은 내일로 미뤄요."};
+const COLORS=[["보랏빛","#b58cff"],["새벽 남색","#5b7cff"],["장미빛","#ff7d9d"],["달빛 금색","#f0cf78"],["청록","#4fd1c5"],["석류빛","#e0505f"],["은빛","#c9cfe0"],["연둣빛","#9be564"]];
+const TIMES=["오전 7시 무렵","오전 10시 무렵","낮 12시 무렵","오후 3시 무렵","오후 6시 무렵","밤 9시 무렵","밤 11시 무렵"];
+const WARN=["급하게 결정하기","늦은 밤 야식","남의 말에 휘둘리기","약속 시간 어기기","혼잣말로 자책하기","스마트폰에 오래 빠지기","무리한 약속 잡기"];
+const ZS=[[20,"물병자리"],[19,"물고기자리"],[21,"양자리"],[20,"황소자리"],[21,"쌍둥이자리"],[22,"게자리"],[23,"사자자리"],[23,"처녀자리"],[24,"천칭자리"],[24,"전갈자리"],[23,"사수자리"],[22,"염소자리"]];
+const ANIMALS=["원숭이","닭","개","돼지","쥐","소","호랑이","토끼","용","뱀","말","양"];
+const app=document.getElementById("app");
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+const sign=(m,d)=>d>=ZS[m-1][0]?ZS[m-1][1]:(m===1?"염소자리":ZS[m-2][1]);
+const fresh=()=>{const n=new Date(),p=v=>String(v).padStart(2,"0");return{t:"연애운",name:"",gender:"선택 안 함",y:"",m:"",d:"",today:`${n.getFullYear()}-${p(n.getMonth()+1)}-${p(n.getDate())}`,blood:"모름",mood:"보통",status:"솔로"}};
+let S=fresh();
+const sky=document.getElementById("sky");
+for(let i=0;i<80;i++){const s=document.createElement("i"),z=Math.random()*2+1;s.className="st";s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${z}px;height:${z}px;animation-delay:${Math.random()*3}s;opacity:${.4+Math.random()*.6}`;sky.appendChild(s);}
+const chips=(k,l)=>`<div class="chips" data-k="${k}">${l.map(v=>`<button type="button" class="chip${S[k]===v?" on":""}" data-v="${v}">${v}</button>`).join("")}</div>`;
+const sel=(k,arr,u)=>`<select id="${k}" aria-label="${u}"><option value="">${u}</option>${arr.map(v=>`<option value="${v}"${String(S[k])===String(v)?" selected":""}>${v}${u}</option>`).join("")}</select>`;
+function form(err){
+ const yr=new Date().getFullYear(),ys=Array.from({length:yr-1939},(_,i)=>yr-i),r=n=>Array.from({length:n},(_,i)=>i+1);
+ app.innerHTML=`<h1>달빛 점집</h1><p class="sub">몇 가지만 알려주면 오늘 밤의 운세를 읽어드려요.</p>
+ <label>운세 종류</label>${chips("t",["연애운","공부운"])}
+ <label for="n">이름</label><input id="n" maxlength="12" autocomplete="off" value="${esc(S.name)}">
+ <label>성별</label>${chips("gender",["남자","여자","선택 안 함"])}
+ <label>생년월일</label><div class="g3">${sel("y",ys,"년")}${sel("m",r(12),"월")}${sel("d",r(31),"일")}</div>
+ <label for="td">운세 볼 날짜 (수정 가능)</label><input id="td" type="date" value="${S.today}">
+ <label>혈액형</label>${chips("blood",["A","B","O","AB","모름"])}
+ <label>지금 기분</label>${chips("mood",["좋음","보통","지침","설렘"])}
+ <label>${S.t==="연애운"?"현재 연애 상태":"요즘 공부 상태"}</label>${chips("status",ST[S.t])}
+ <p class="err" role="alert">${err||""}</p>
+ <div class="btns"><button class="btn" id="rs">초기화</button><button class="btn main" id="go">운세 보기</button></div>`;
+ document.getElementById("n").oninput=e=>S.name=e.target.value;
+ ["y","m","d"].forEach(k=>document.getElementById(k).onchange=e=>S[k]=e.target.value);
+ document.getElementById("td").onchange=e=>S.today=e.target.value;
+ app.querySelectorAll(".chips").forEach(c=>c.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;S[c.dataset.k]=b.dataset.v;if(c.dataset.k==="t")S.status=ST[S.t][0];form();});
+ document.getElementById("rs").onclick=()=>{S=fresh();form();};
+ document.getElementById("go").onclick=go;
+}
+function go(){
+ const nm=S.name.trim();
+ if(!nm)return form("이름을 입력해 주세요.");
+ if(!S.y||!S.m||!S.d)return form("생년월일을 모두 선택해 주세요.");
+ const dt=new Date(+S.y,+S.m-1,+S.d);
+ if(dt.getMonth()!==+S.m-1)return form("존재하지 않는 날짜예요. 생년월일을 확인해 주세요.");
+ if(!S.today)return form("운세 볼 날짜를 입력해 주세요.");
+ const [ty,tm,td]=S.today.split("-").map(Number);
+ if(new Date(ty,tm-1,td)<dt)return form("기준 날짜가 생일보다 앞이에요.");
+ S.name=nm;load();
+}
+function load(){
+ app.innerHTML=`<div class="rune" aria-hidden="true">♥</div><p class="wait" role="status">카드를 섞는 중…</p>`;
+ setTimeout(()=>{const w=app.querySelector(".wait");if(w)w.textContent="별을 읽는 중…";},650);
+ setTimeout(show,1300);
+}
+function show(){
+ const d=P[S.t],n=esc(S.name)+"님",y=+S.y,m=+S.m,dd=+S.d,[ty,tm,td]=S.today.split("-").map(Number);
+ const age=ty-y-((tm<m||(tm===m&&td<dd))?1:0);
+ const stars=1+Math.floor(Math.random()*5),ti=stars>=4?2:stars===3?1:0;
+ const pct=20+(stars-1)*17+Math.floor(Math.random()*13);
+ const rows=[[d.s1[0],rnd(d.s1[1][ti])],[d.s2[0],rnd(d.s2[1][ti])],["지금 상태 맞춤",STT[S.status]],["오늘의 조언",rnd(d.adv)],["오늘의 나",((BL[S.blood]||"")+" "+MT[S.mood]).trim()],["조심할 것",rnd(WARN)]];
+ if(m===tm&&dd===td)rows.unshift(["오늘은 생일이에요","특별한 기운이 더해져 운이 한 단계 올라가요."]);
+ const mate=S.t==="연애운"?`<div class="mate"><p class="kind love-c">♥ 운명의 상대</p>${PT.map(([k,a])=>`<div class="row"><b>${k}</b><p>${rnd(a)}</p></div>`).join("")}</div>`:"";
+ const col=rnd(COLORS),num=1+Math.floor(Math.random()*99);
+ app.innerHTML=`<h1>달빛 점집</h1><p class="sub">오늘 밤의 결과예요.</p>
+ <section class="card">
+  <p class="who">${n}${S.gender!=="선택 안 함"?" · "+S.gender:""} · 만 ${age}세<br>${y}년 ${m}월 ${dd}일생 · ${ANIMALS[y%12]}띠 · ${sign(m,dd)}${S.blood!=="모름"?" · "+S.blood+"형":""}<br>기준일 ${ty}년 ${tm}월 ${td}일</p>
+  <div class="top"><p class="kind ${d.cls}">${S.t}</p><span class="stars" aria-label="5점 만점에 ${stars}점">${"★".repeat(stars)}${"☆".repeat(5-stars)}</span></div>
+  <p class="head">${rnd(d.sum[ti]).replace("{n}",n)}</p>
+  <div class="gauge ${d.cls}"><i style="width:${pct}%"></i></div><p class="pct">운세 지수 ${pct}%</p>
+  ${rows.map(([k,v])=>`<div class="row"><b>${k}</b><p>${v}</p></div>`).join("")}
+  ${mate}
+  <div class="lucky"><svg class="heart" viewBox="0 0 100 90" aria-hidden="true"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9ad0"/><stop offset="1" stop-color="#b04cff"/></linearGradient></defs><path d="M50 86C8 56 0 30 14 14C27 1 45 6 50 21C55 6 73 1 86 14C100 30 92 56 50 86Z" fill="url(#hg)"/><text x="50" y="48" text-anchor="middle" dominant-baseline="central">${num}</text></svg>
+   <p><b style="color:var(--gold)">오늘의 행운의 숫자 ${num}</b><br><span class="dot" style="background:${col[1]}"></span>행운의 색 ${col[0]}<br>행운의 시간 ${rnd(TIMES)}</p></div>
+ </section>
+ <div class="btns"><button class="btn main" id="again">다시 뽑기</button><button class="btn" id="edit">수정하기</button><button class="btn" id="rs">초기화</button></div>`;
+ document.getElementById("again").onclick=load;
+ document.getElementById("edit").onclick=()=>form();
+ document.getElementById("rs").onclick=()=>{S=fresh();form();};
+}
+form();
+</script>
+</body>
+</html>
+
